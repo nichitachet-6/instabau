@@ -40,7 +40,8 @@ h1{font-size:28px;line-height:1.15;text-align:center;font-weight:800;margin-top:
 var TOPIC="instabau-pm265-16e3305a",GOAL=1000,URL="https://ntfy.sh/"+TOPIC;
 var total=0,mine=0,pending=0,sending=false,done=false;
 var y=document.getElementById('y'),n=document.getElementById('n'),f=document.getElementById('f');
-function render(){var p=Math.min(1,total/GOAL);n.textContent=Math.min(total,GOAL);f.style.width=(p*100)+'%';
+var TV=0,TR=0;function tw(to){var from=TV,t0=performance.now();cancelAnimationFrame(TR);if(to===0){TV=0;n.textContent='0';return}(function f(t){var k=Math.min(1,(t-t0)/500);k=1-Math.pow(1-k,3);TV=Math.round(from+(to-from)*k);n.textContent=TV;if(k<1)TR=requestAnimationFrame(f)})(t0)}
+function render(){var p=Math.min(1,total/GOAL);tw(Math.min(total,GOAL));f.style.width=(p*100)+'%';
  if(p>=1&&!done){done=true;var fl=document.getElementById('fl');fl.className='on';setTimeout(function(){fl.className=''},900);y.style.filter='none';y.style.transform='none';document.getElementById('m').className='done';try{y.currentTime=0;y.play()}catch(e){};document.getElementById('t').textContent='Gata! Acum mă vedeți.';document.getElementById('me').textContent='Mulțumesc! Ai dat '+mine+' like-uri.'}}
 document.getElementById('btn').addEventListener('pointerdown',function(e){if(done)return;mine+=10;pending+=10;total+=10;document.getElementById('me').textContent='Ai dat '+mine+' like-uri';render();
  var h=document.createElement('img');h.className='fly';h.src=this.firstElementChild.src;h.style.left=(e.clientX-22)+'px';h.style.top=(e.clientY-22)+'px';
